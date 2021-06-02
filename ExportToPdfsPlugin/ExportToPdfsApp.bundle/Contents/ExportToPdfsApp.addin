@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+  <AddIn Type="DBApplication">
+    <Name>ExportToPdfsApp</Name>
+    <Assembly>.\ExportToPdfsApp.dll</Assembly>
+    <AddInId>C0C50A98-053F-44B3-9D00-7149C86B16C7</AddInId>
+    <FullClassName>ExportToPdfsApp.ExportToPdfsApp</FullClassName>
+    <Description>"Export Revit 2D drawing sheets to PDFs."</Description>
+    <VendorId>Autodesk</VendorId>
+    <VendorDescription>Autodesk</VendorDescription>
+  </AddIn>
+</RevitAddIns>

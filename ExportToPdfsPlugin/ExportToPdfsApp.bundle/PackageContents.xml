@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ApplicationPackage>
+  <Components Description="Export Revit drawing sheets to PDFs">
+    <RuntimeRequirements OS="Win64"
+                         Platform="Revit"
+                         SeriesMin="R2022"
+                         SeriesMax="R2022" />
+    <ComponentEntry AppName="ExportToPdfsApp"
+                    Version="1.0.0"
+                    ModuleName="./Contents/ExportToPdfsApp.addin"
+                    AppDescription="Export Revit drawing sheets to PDFs"
+                    LoadOnCommandInvocation="False"
+                    LoadOnRevitStartup="True" />
+  </Components>
+</ApplicationPackage>
