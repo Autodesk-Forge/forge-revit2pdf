@@ -95,19 +95,25 @@ namespace ExportToPdfsApp
                     .OfClass(typeof(View))
                     .Cast<View>()
                     .Where(vw => (
-                    inputParams.DrawingSheet && vw.ViewType == ViewType.DrawingSheet && !vw.IsTemplate
-                    || inputParams.ScheduleTable && vw.ViewType == ViewType.DraftingView
-                        )
-                    ).ToList();
+                    !vw.IsTemplate && vw.CanBePrinted
+                    && (inputParams.DrawingSheet && vw.ViewType == ViewType.DrawingSheet
+                    || inputParams.ThreeD    && vw.ViewType == ViewType.ThreeD
+                    || inputParams.Detail    && vw.ViewType == ViewType.Detail
+                    || inputParams.Elevation && vw.ViewType == ViewType.Elevation
+                    || inputParams.FloorPlan && vw.ViewType == ViewType.FloorPlan
+                    || inputParams.Rendering && vw.ViewType == ViewType.Rendering
+                    || inputParams.Section   && vw.ViewType == ViewType.Section )
+                    )
+                ).ToList();
 
                 Console.WriteLine("the number of views: " + views.Count);
 
+                // add the limitation for 5 views as max
                 IList<ElementId> viewIds = new List<ElementId>();
-                foreach (View view in views)
+                for(int i =0; i< 5; ++i)
                 {
-                    //ViewSheet viewSheet = view as ViewSheet;
-                    Console.WriteLine(view.Name);
-                    viewIds.Add(view.Id);
+                    Console.WriteLine(views[i].Name +@", view type is: " + views[i].ViewType.ToString());
+                    viewIds.Add(views[i].Id);
                 }
 
 
@@ -133,13 +139,19 @@ namespace ExportToPdfsApp
     internal class InputParams
     {
         public bool DrawingSheet { get; set; } = true;
-        public bool ScheduleTable { get; set; } = true;
+        public bool ThreeD { get; set; } = true;
+        public bool Detail { get; set; } = true;
+        public bool Elevation { get; set; } = true;
+        public bool FloorPlan { get; set; } = true;
+        public bool Section { get; set; } = true;
+        public bool Rendering { get; set; } = true;
+
         static public InputParams Parse(string jsonPath)
         {
             try
             {
                 if (!File.Exists(jsonPath))
-                    return new InputParams { DrawingSheet = true, ScheduleTable = true };
+                    return new InputParams { DrawingSheet = true, ThreeD = true, Detail = true, Elevation = true, FloorPlan = true, Section = true, Rendering = true };
 
                 string jsonContents = File.ReadAllText(jsonPath);
                 return JsonConvert.DeserializeObject<InputParams>(jsonContents);

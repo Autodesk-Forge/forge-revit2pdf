@@ -28,7 +28,7 @@ $(document).ready(function () {
         }
     });
 
-    $('#startWorkitem').click(startWorkitem);
+    $('#startWorkitem').click(export2Pdf);
     $('#cancelBtn').click(async function(){
         if (workingItem != null) {
             try {
@@ -94,7 +94,7 @@ socketio.on(SOCKET_TOPIC_WORKITEM, (data)=>{
 
 
 
-async function startWorkitem() {
+async function export2Pdf() {
     const instanceTree = $('#sourceHubs').jstree(true);
     if( instanceTree == null ){
         alert('Can not get the user hub');
@@ -120,41 +120,35 @@ async function startWorkitem() {
         return;
     }
 
-    // exporting = $('input[name="exportOrImport"]:checked').val() === 'export';
     const drawingSheet = $('#drawingSheet')[0].checked;
-    const scheduleTable = $('#scheduleTable')[0].checked;
+    const threeD    = $('#threeD')[0].checked;
+    const detail    = $('#detail')[0].checked;
+    const elevation = $('#elevation')[0].checked;
+    const floorPlan = $('#floorPlan')[0].checked;
+    const section   = $('#section')[0].checked;
+    const rendering = $('#rendering')[0].checked;
 
-    if( !drawingSheet && !scheduleTable ){
+    if( !drawingSheet && !threeD && !detail && !elevation && !floorPlan){
         alert('Please at least select one parameter you want to Export|Import');
         return;
     }
 
     const inputJson = { 
         DrawingSheet : drawingSheet,
-        ScheduleTable: scheduleTable
+        ThreeD: threeD,
+        Detail: detail,
+        Elevation:elevation,
+        FloorPlan:floorPlan,
+        Section:section,
+        Rendering:rendering
       };
 
       
     try {
         let res = null;
-        // if(exporting){
-            updateStatus('started');
-            res = await exportToPdfs( sourceNode.original.storage, inputJson );
-            console.log('The pdf file is exported');
-        // }
-        // else {
-        //     if (_fileInputForm == null || _fileInputForm.files.length === 0){
-        //         alert('Please select input Excel first');
-        //         return;
-        //     }
-        //     updateStatus('started');
-        //     var file = _fileInputForm.files[0];
-        //     const storageUrl = await uploadExcel(file);
-        //     console.log( storageUrl );
-        //     // updateStatus('uploaded');
-        //     res = await importExcel( sourceNode.original.storage, storageUrl , inputJson,  sourceNode.parent, fileName );
-        //     console.log('The parameters are imported');
-        // }
+        updateStatus('started');
+        res = await exportToPdfs(sourceNode.original.storage, inputJson);
+        console.log('The pdf file is exported');
         console.log(res);
         workingItem = res.workItemId;
         updateStatus(res.workItemStatus);

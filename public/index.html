@@ -120,89 +120,121 @@
         <div class="row ">
           <div style="padding-top: 10px; text-align: center;">
             <form class="bs-example bs-example-form" role="form">
-                <div class="row">
-                  <div style="padding-top: 10px; text-align: left;">
-                      <div class="col-lg-12">
-                          <div style="text-align: left;">
-                              <label>Select view type to be exported:</label>
-                        </div>
-                        <div class="input-group">
-                          <span class="input-group-addon">
-                              <input type="checkbox" id='drawingSheet' checked=true>
-                          </span>
-                          <label class="form-control">Drawing Sheet</label>
-                      </div><!-- /input-group -->
-                      <div class="input-group">
-                        <span class="input-group-addon">
-                            <input type="checkbox" id='scheduleTable' checked=true>
-                        </span>
-                        <label class="form-control">2D View</label>
-                    </div><!-- /input-group -->
-                      </div>
-                  </div>
-              </div>
-            <br>
-                <div class="row" hidden>
-                    <div style="padding-top: 10px; text-align: left;">
-                        <div class="col-lg-12">
-                            <div style="text-align: left;">
-                                <label>Export or Import:</label>
-                          </div>
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <input type="radio" name='exportOrImport' value='export' checked>
-                                </span>
-                                <label class="form-control">Export parameters To Excel</label>
-                            </div><!-- /input-group -->
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <input type="radio" name='exportOrImport' value='import'>
-                                </span>
-                                <label class="form-control">Import parameters from Excel</label>
-                            </div><!-- /input-group -->                          
-                            <div class="form-group" id="importSharedParameters" hidden>
-                                <label for="inputFile">Input Spreadsheet file( Please export first to check the Excel format )</label>
-                                <input type="file" class="form-control-file" id="inputFile">
-                            </div>
-                        </div>
+              <div class="row">
+                <div style="padding-top: 10px; text-align: left;">
+                  <div class="col-lg-12">
+                    <div style="text-align: left;">
+                      <label>Select view types</label>
                     </div>
+                    <div class="input-group">
+                      <span class="input-group-addon">
+                        <input type="checkbox" id='drawingSheet' checked=true>
+                      </span>
+                      <label class="form-control">Drawing Sheet</label>
+                    </div><!-- /input-group -->
+                    <div class="input-group">
+                      <span class="input-group-addon">
+                        <input type="checkbox" id='threeD' checked=true>
+                      </span>
+                      <label class="form-control">3D View</label>
+                    </div><!-- /input-group -->
+                    <div class="input-group">
+                      <span class="input-group-addon">
+                        <input type="checkbox" id='detail' checked=true>
+                      </span>
+                      <label class="form-control">Detail</label>
+                    </div><!-- /input-group -->
+                    <div class="input-group">
+                      <span class="input-group-addon">
+                        <input type="checkbox" id='elevation' checked=true>
+                      </span>
+                      <label class="form-control">Elevation</label>
+                    </div><!-- /input-group -->
+                    <div class="input-group">
+                      <span class="input-group-addon">
+                        <input type="checkbox" id='floorPlan' checked=true>
+                      </span>
+                      <label class="form-control">Floor Plan</label>
+                    </div><!-- /input-group -->
+                    <div class="input-group">
+                      <span class="input-group-addon">
+                        <input type="checkbox" id='section' checked=true>
+                      </span>
+                      <label class="form-control">Section</label>
+                    </div><!-- /input-group -->
+                    <div class="input-group">
+                      <span class="input-group-addon">
+                        <input type="checkbox" id='rendering' checked=true>
+                      </span>
+                      <label class="form-control">Rendering</label>
+                    </div><!-- /input-group -->
+                    <div style="text-align: left;">
+                      <label>Note: Only 5 views at maximun can be exported by this sample  </label>
+                    </div>
+                  </div>
                 </div>
+              </div>
+              <br>
+              <div class="row" hidden>
+                <div style="padding-top: 10px; text-align: left;">
+                  <div class="col-lg-12">
+                    <div style="text-align: left;">
+                      <label>Export or Import:</label>
+                    </div>
+                    <div class="input-group">
+                      <span class="input-group-addon">
+                        <input type="radio" name='exportOrImport' value='export' checked>
+                      </span>
+                      <label class="form-control">Export parameters To Excel</label>
+                    </div><!-- /input-group -->
+                    <div class="input-group">
+                      <span class="input-group-addon">
+                        <input type="radio" name='exportOrImport' value='import'>
+                      </span>
+                      <label class="form-control">Import parameters from Excel</label>
+                    </div><!-- /input-group -->
+                    <div class="form-group" id="importSharedParameters" hidden>
+                      <label for="inputFile">Input Spreadsheet file( Please export first to check the Excel format )</label>
+                      <input type="file" class="form-control-file" id="inputFile">
+                    </div>
+                  </div>
+                </div>
+              </div>
             </form>
             <!-- </div> -->
-
-
+        
+        
             <div class="btn-group btn-lg">
-
-                <div style="padding-top: 10px;">
-
-                  <button class="btn btn-primary" id="startWorkitem">
-                    <span class="glyphicon glyphicon-play"></span>Export
-                  </button>
-                  <button class="btn btn-primary" id="cancelBtn" disabled>
-                    <span class="glyphicon glyphicon-stop"></span>Cancel
-                  </button>
-                </div>
+        
+              <div style="padding-top: 10px;">
+        
+                <button class="btn btn-primary" id="startWorkitem">
+                  <span class="glyphicon glyphicon-play"></span>Export
+                </button>
+                <button class="btn btn-primary" id="cancelBtn" disabled>
+                  <span class="glyphicon glyphicon-stop"></span>Cancel
+                </button>
               </div>
-            <br />       
+            </div>
+            <br />
             <div class="row">
-                <div style="text-align: left;">
-                  <label id="statusText">
-                    <h4>Progress</h4>
-                  </label>
+              <div style="text-align: left;">
+                <label id="statusText">
+                  <h4>Progress</h4>
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div>
+                <div class="progress progress-striped active">
+                  <div id='parametersUpdateProgressBar' class="progress-bar progress-bar-success" role="progressbar"
+                    aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                    <span class="sr-only">40% 完成</span>
+                  </div>
                 </div>
               </div>
-              <div class="row">
-                <div>
-                    <div class="progress progress-striped active">
-                        <div id='parametersUpdateProgressBar' class="progress-bar progress-bar-success" role="progressbar"
-                             aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
-                             style="width: 0%;">
-                            <span class="sr-only">40% 完成</span>
-                        </div>
-                    </div>
-                </div>
-              </div>                
-
+            </div>
+        
           </div>
         </div>
       </div>

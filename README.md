@@ -126,6 +126,7 @@ After installing Github desktop for Windows, on the Git Shell, if you see a ***e
 - Currently Revit Cloud Worksharing is not supported by the Design Automation.  The scenario that this sample demonstrates is applicable only with a file-based Revit model. 
 - Client JavaScript requires modern browser.
 - The sample only supports Revit Design Automation Engine 2022.
+- Only 5 views at maximun could be exported by this sample.
 
 ## License
 
