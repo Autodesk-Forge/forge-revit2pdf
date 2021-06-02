@@ -22,9 +22,6 @@ This sample demonstrates how to export views and sheets from Revit to PDF with t
 # Thumbnail
 ![thumbnail](/thumbnail.png)
 
-# Demonstration
-[![https://youtu.be/nOAEzimdq5Q](http://img.youtube.com/vi/nOAEzimdq5Q/0.jpg)](http://www.youtube.com/watch?v=nOAEzimdq5Q "Export|Import Revit parameter values to|from Excel")
-
 # Live Demo
 [https://revit2pdf.herokuapp.com/](https://revit2pdf.herokuapp.com/)
 
@@ -102,8 +99,6 @@ Watch [this video](https://www.youtube.com/watch?v=Oqa9O20Gj0c) on how deploy sa
 ## Packages used
 
 The [Autodesk Forge](https://www.npmjs.com/package/forge-apis) packages is included by default. Some other non-Autodesk packaged are used, including [socket.io](https://www.npmjs.com/package/socket.io), [express](https://www.npmjs.com/package/express).
-
-Within the Revit Plugin, [LibXL](http://www.libxl.com) is used to read/write the date of Excel. 
 
 ## Further Reading
 
