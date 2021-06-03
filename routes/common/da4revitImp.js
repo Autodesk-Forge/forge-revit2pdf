@@ -134,87 +134,6 @@ function cancelWorkitem(workItemId, access_token) {
 }
 
 
-function importExcel(inputRvtUrl, inputExcUrl, inputJson, outputRvtUrl, projectId, createVersionBody, access_token_3Legged, access_token_2Legged){
-    return new Promise(function (resolve, reject) {
-
-        const workitemBody = {
-
-            activityId: designAutomation.nickname + '.' + designAutomation.activity_name,
-            arguments: {
-                inputFile: {
-                    url: inputRvtUrl,
-                    Headers: {
-                        Authorization: 'Bearer ' + access_token_3Legged.access_token
-                    },
-                },
-                inputJson: {
-                    url: "data:application/json," + JSON.stringify(inputJson)
-                },
-                inputXls: {
-                    url: inputExcUrl,
-                },
-
-                outputRvt: {
-                    verb: 'put',
-                    url: outputRvtUrl,
-                    Headers: {
-                        Authorization: 'Bearer ' + access_token_3Legged.access_token
-                    },
-                },
-                onComplete: {
-                    verb: "post",
-                    url: designAutomation.webhook_url
-                }
-            }
-        };
-
-        var options = {
-            method: 'POST',
-            url: designAutomation.endpoint+'workitems',
-            headers: {
-                Authorization: 'Bearer ' + access_token_2Legged.access_token,
-                'Content-Type': 'application/json'
-            },
-            body: workitemBody,
-            json: true
-        };
-
-        request(options, function (error, response, body) {
-            if (error) {
-                reject(error);
-            } else {
-                let resp;
-                try {
-                    resp = JSON.parse(body)
-                } catch (e) {
-                    resp = body
-                }
-                workitemList.push({
-                    workitemId: resp.id,
-                    projectId: projectId,
-                    createVersionData: createVersionBody,
-                    access_token_3Legged: access_token_3Legged
-                })
-
-                if (response.statusCode >= 400) {
-                    console.log('error code: ' + response.statusCode + ' response message: ' + response.statusMessage);
-                    reject({
-                        statusCode: response.statusCode,
-                        statusMessage: response.statusMessage
-                    });
-                } else {
-                    resolve({
-                        statusCode: response.statusCode,
-                        headers: response.headers,
-                        body: resp
-                    });
-                }
-            }
-        });
-    })    
-}
-
-
 function exportPdfs(inputRvtUrl, inputJson, outputExlUrl, access_token_3Legged, access_token_2Legged) {
 
     return new Promise(function (resolve, reject) {
@@ -437,7 +356,6 @@ module.exports =
     getWorkitemStatus, 
     cancelWorkitem, 
     exportPdfs,
-    importExcel,
     getLatestVersionInfo, 
     getNewCreatedStorageInfo, 
     createBodyOfPostVersion,

@@ -18,16 +18,6 @@
 
 $(document).ready(function () {
 
-    $('input:radio[name="exportOrImport"]').click(function () {
-        var checkValue = $('input:radio[name="exportOrImport"]:checked').val();
-        if (checkValue === 'import') {
-            $('#importSharedParameters').show();
-
-        } else {
-            $('#importSharedParameters').hide();
-        }
-    });
-
     $('#startWorkitem').click(export2Pdf);
     $('#cancelBtn').click(async function(){
         if (workingItem != null) {
@@ -38,22 +28,6 @@ $(document).ready(function () {
                 console.log('Failed to cancel the job');
             }
         }
-    });
-
-
-    $('#inputFile').change(function () {
-        _fileInputForm = this;
-        if (_fileInputForm.files.length === 0) 
-            return;
-
-        var file = _fileInputForm.files[0];
-
-        const fileNameParams = file.name.split('.');
-        if( fileNameParams[fileNameParams.length-1].toLowerCase() !== "xls"){
-            alert('please select Excel file and try again');
-            _fileInputForm.value = '';
-            return;
-        }    
     });
 });
 
@@ -82,11 +56,6 @@ socketio.on(SOCKET_TOPIC_WORKITEM, (data)=>{
   if(status === 'completed' && sourceNode != null){
     console.log('Parameters are handled');
     console.log(data);
-    if( !exporting ){
-        let instance = $('#sourceHubs').jstree(true);
-        parentNode = instance.get_parent(sourceNode);
-        instance.refresh_node(parentNode);    
-    }
     sourceNode = null;
   }
 })
@@ -128,8 +97,8 @@ async function export2Pdf() {
     const section   = $('#section')[0].checked;
     const rendering = $('#rendering')[0].checked;
 
-    if( !drawingSheet && !threeD && !detail && !elevation && !floorPlan){
-        alert('Please at least select one parameter you want to Export|Import');
+    if( !drawingSheet && !threeD && !detail && !elevation && !floorPlan && !section && !rendering){
+        alert('Please at least select one view type you want to export');
         return;
     }
 
@@ -160,38 +129,6 @@ async function export2Pdf() {
     return;
 }
 
-async function uploadExcel( file ){
-    let def = $.Deferred();
-
-    if(file === null){
-        def.reject('input file is null');
-        return def.promise();
-    }
-
-    var formData = new FormData();
-    formData.append('fileToUpload', file);
-    // formData.append('bucketKey', BUCKET_KEY);
-
-    $.ajax({
-        url: '/api/forge/datamanagement/v1/oss/object',
-        data: formData,
-        processData: false,
-        contentType: false,
-        type: 'POST',
-        success: function (data) {
-            inputExcel = data;
-            console.log(data);
-            def.resolve(data);
-        },
-        error: function (err) {
-            def.reject(err);
-        }
-
-    });
-    return def.promise();
-}
-
-
 
 async function exportToPdfs( inputRvt, inputJson){
     let def = $.Deferred();
@@ -212,32 +149,6 @@ async function exportToPdfs( inputRvt, inputJson){
     return def.promise();
 }
 
-
-async function importExcel( inputRvt, inputExcel, inputJson, itemId, fileName){
-    let def = $.Deferred();
-
-    jQuery.post({
-        url: '/api/forge/da4revit/v1/revit/' + encodeURIComponent(inputRvt) + '/excel',
-        contentType: 'application/json', // The data type was sent
-        dataType: 'json', // The data type will be received
-        data: JSON.stringify({
-            'InputExcUrl': inputExcel,
-            'ItemUrl': itemId,
-            'FileItemName': fileName,
-            'Data': inputJson
-        }),
-
-        success: function (res) {
-            def.resolve(res);
-        },
-        error: function (err) {
-            def.reject(err);
-        }
-    });
-
-    return def.promise();
-  
-}
 
 
 
@@ -295,14 +206,14 @@ function updateStatus(status, extraInfo = '') {
     switch (status) {
         case "started":
             setProgress(20, 'parametersUpdateProgressBar');
-            statusText.innerHTML = "<h4>Step " + (exporting ? "1/3":"1/4") +  ":  Uploading input parameters</h4>"
+            statusText.innerHTML = "<h4>Step 1/3:  Uploading view type information</h4>"
             // Disable Create and Cancel button
             upgradeBtnElm.disabled = true;
             cancelBtnElm.disabled = true;
             break;
         case "pending":
             setProgress(40, 'parametersUpdateProgressBar');
-            statusText.innerHTML = "<h4>Step " + (exporting ? "2/3":"2/4") +  ": Running Design Automation</h4>"
+            statusText.innerHTML = "<h4>Step 2/3: Running Design Automation</h4>"
             upgradeBtnElm.disabled = true;
             cancelBtnElm.disabled = false;
             break;
@@ -314,10 +225,7 @@ function updateStatus(status, extraInfo = '') {
             break;
         case "completed":
             setProgress(100, 'parametersUpdateProgressBar');
-            statusText.innerHTML = 
-                exporting ? 
-                    "<h4>Step 3/3: Done, Ready to <a href='" + extraInfo + "'>DOWNLOAD</a></h4>" 
-                   :"<h4>Step 4/4: Done, Check in BIM360</h4>";
+            statusText.innerHTML = "<h4>Step 3/3: Done, Ready to <a href='" + extraInfo + "'>DOWNLOAD</a></h4>";
             // Enable Create and Cancel button
             upgradeBtnElm.disabled = false;
             cancelBtnElm.disabled = true;
