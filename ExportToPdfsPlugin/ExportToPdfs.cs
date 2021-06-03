@@ -110,7 +110,7 @@ namespace ExportToPdfsApp
 
                 // add the limitation for 5 views as max
                 IList<ElementId> viewIds = new List<ElementId>();
-                for(int i =0; i< 5; ++i)
+                for(int i =0; i< views.Count && i < 5; ++i)
                 {
                     Console.WriteLine(views[i].Name +@", view type is: " + views[i].ViewType.ToString());
                     viewIds.Add(views[i].Id);
