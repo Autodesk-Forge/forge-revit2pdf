@@ -32,7 +32,7 @@ This sample demonstrates how to export views and sheets from Revit to PDF with t
 1. **Forge Account**: Learn how to create a Forge Account, activate subscription and create an app at [this tutorial](http://learnforge.autodesk.io/#/account/). 
 2. **Visual Code**: Visual Code (Windows or MacOS).
 3. **ngrok**: Routing tool, [download here](https://ngrok.com/)
-4. **Revit 2019**: required to compile changes into the plugin
+4. **Revit 2022**: required to compile changes into the plugin
 5. **JavaScript ES6** syntax for server-side.
 6. **JavaScript** basic knowledge with **jQuery**
 
@@ -55,7 +55,7 @@ Run `ngrok http 3000` to create a tunnel to your local machine, then copy the ad
 
 ### Environment variables
 
-Set the enviroment variables with your client ID & secret and finally start it. Via command line, navigate to the folder where this repository was cloned and use the following:
+Set the environment variables with your client ID & secret and finally start it. Via command line, navigate to the folder where this repository was cloned and use the following:
 
 Mac OSX/Linux (Terminal)
 
@@ -78,6 +78,24 @@ Windows (use **Node.js command line** from Start menu)
     set DESIGN_AUTOMATION_NICKNAME=<<YOUR DESIGN AUTOMATION FOR REVIT NICK NAME>>
     set DESIGN_AUTOMATION_ACTIVITY_NAME=<<YOUR DESIGN AUTOMATION FOR REVIT ACTIVITY NAME>>
     npm start
+
+Windows (use **PowerShell** from Start menu)
+
+    npm install
+    $env:FORGE_CLIENT_ID="YOUR CLIENT ID FROM DEVELOPER PORTAL"
+    $env:FORGE_CLIENT_SECRET="YOUR CLIENT SECRET"
+    $env:FORGE_CALLBACK_URL="YOUR CALLBACK URL"
+    $env:FORGE_WEBHOOK_URL="YOUR DESIGN AUTOMATION FOR REVIT CALLBACK URL"
+    $env:DESIGN_AUTOMATION_NICKNAME="YOUR DESIGN AUTOMATION FOR REVIT NICK NAME"
+    $env:DESIGN_AUTOMATION_ACTIVITY_NAME="YOUR DESIGN AUTOMATION FOR REVIT ACTIVITY NAME"
+    npm start
+
+**Note.**
+environment variable examples:
+- FORGE_CALLBACK_URL: `http://localhost:3000/api/forge/callback/oauth`
+- FORGE_WEBHOOK_URL: `http://808efcdc123456.ngrok.io/api/forge/callback/designautomation`
+- DESIGN_AUTOMATION_NICKNAME: You can pass your client id here, but if you have set up the [nickname](https://forge.autodesk.com/en/docs/design-automation/v3/tutorials/revit/step3-create-nickname/), please specify your nickname to this environment variable.
+- DESIGN_AUTOMATION_ACTIVITY_NAME: `ExportToPdfsAppActivity+dev`
 
 ### Using the app
 
@@ -126,7 +144,7 @@ After installing Github desktop for Windows, on the Git Shell, if you see a ***e
 - Currently Revit Cloud Worksharing is not supported by the Design Automation.  The scenario that this sample demonstrates is applicable only with a file-based Revit model. 
 - Client JavaScript requires modern browser.
 - The sample only supports Revit Design Automation Engine 2022.
-- Only 5 views at maximun could be exported by this sample.
+- Only 5 views at maximum could be exported by this sample.
 
 ## License
 
