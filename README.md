@@ -40,14 +40,17 @@ This sample demonstrates how to export views and sheets from Revit to PDF with t
 For using this sample, you need an Autodesk developer credentials. Visit the [Forge Developer Portal](https://developer.autodesk.com), sign up for an account, then [create an app](https://developer.autodesk.com/myapps/create). For this new app, use **http://localhost:3000/api/forge/callback/oauth** as Callback URL, although is not used on 2-legged flow. Finally take note of the **Client ID** and **Client Secret**.
 
 ## Running locally
+1. Open ExportToPdfsApp.sln in Visual Studio, build the Revit Addon, it will build `ExportToPdfsApp.dll` and package `ExportToPdfsApp.bundle` into folder of \</public/bundles\> automatically.
 
-Install [NodeJS](https://nodejs.org), version 8 or newer.
+2. Install [NodeJS](https://nodejs.org), version 8 or newer.
 
-Clone this project or download it (this `nodejs` branch only). It's recommended to install [GitHub desktop](https://desktop.github.com/). To clone it via command line, use the following (**Terminal** on MacOSX/Linux, **Git Shell** on Windows):
+3. Clone this project or download it (this `nodejs` branch only). It's recommended to install [GitHub desktop](https://desktop.github.com/). To clone it via command line, use the following (**Terminal** on MacOSX/Linux, **Git Shell** on Windows):
 
     git clone https://github.com/Autodesk-Forge/design.automation-nodejs-revit.export.pdf
 
-Install the required packages using `npm install`.
+4. Install the required packages using `npm install`.
+5. Start server by `npm start`.
+6. Open the App, click `Configure` button to create the AppBundle & Activity before exporting PDF file, please check the video for the steps at [https://youtu.be/1NCeH7acIko](https://youtu.be/1NCeH7acIko). You can also delete the existing AppBundle & Activity and re-create with different Design Automation Revit engine version.
 
 ### ngrok
 
@@ -104,7 +107,7 @@ Open the browser: [http://localhost:3000](http://localhost:3000), it provides th
 1. Select Revit file version in BIM360 Hub to view the Model, Select view types which you want to export, click 'Export'.
 2. When the pdf file is successfully exported, click `DOWNLOAD` to download the file and open.
 
-`Note`: When you deploy the app, you have to open the `Configure` button to create the AppBundle & Activity before running the Export|Import feature, please check the video for the steps at [https://youtu.be/1NCeH7acIko](https://youtu.be/1NCeH7acIko). You can also delete the existing AppBundle & Activity and re-create with different Design Automation Revit engine version.
+`Note`: When you deploy the app, you have to open the `Configure` button to create the AppBundle & Activity before running the export feature, please check the video for the steps at [https://youtu.be/1NCeH7acIko](https://youtu.be/1NCeH7acIko). You can also delete the existing AppBundle & Activity and re-create with different Design Automation Revit engine version.
 
 ## Deployment
 
