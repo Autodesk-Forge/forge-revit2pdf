@@ -22,6 +22,7 @@ const { credentials }= require('../config');
 const {
     BucketsApi,
     ObjectsApi,
+    PostBucketsSigned
 } = require('forge-apis');
 
 const { OAuth } = require('./common/oauthImp');
