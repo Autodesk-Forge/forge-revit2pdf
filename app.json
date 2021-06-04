@@ -29,8 +29,7 @@
         },
         "DESIGN_AUTOMATION_ACTIVITY_NAME": {
             "description": "Revit Design Automation Activity Name",
-            "value": "ExportToPdfsAppActivity+dev"
-
+            "value": "ExportToPdfsAppActivity"
         }
     },
     "website": "https://developer.autodesk.com/",
