@@ -155,7 +155,7 @@ function exportPdfs(inputRvtUrl, inputJson, outputExlUrl, access_token_3Legged, 
                      outputPdf: {
                         verb: 'put',
                         url: outputExlUrl,
-                        optional: false
+                        optional: 'false'
                     },
                     onComplete: {
                         verb: "post",
