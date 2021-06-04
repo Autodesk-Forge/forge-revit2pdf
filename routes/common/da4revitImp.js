@@ -140,7 +140,7 @@ function exportPdfs(inputRvtUrl, inputJson, outputExlUrl, access_token_3Legged, 
 
         const workitemBody = {
 
-                activityId: designAutomation.activity_name,
+                activityId: designAutomation.nickname+"."+designAutomation.activity_name+"+"+designAutomation.appbundle_activity_alias,
                 arguments: {
                     inputFile: {
                         url: inputRvtUrl,

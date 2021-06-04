@@ -230,16 +230,6 @@ router.post('/designautomation/activities', async( req, res, next) => {
                     description: "input Json parameters",
                     localName: "params.json"
                 },
-                // inputXls: {
-                //     verb: "get",
-                //     description: "input excel file",
-                //     localName: "input.xls"
-                // },
-                // outputRvt: {
-                //     verb: "put",
-                //     description: "output Rvt file",
-                //     localName: "result.rvt"
-                // },
                 outputPdf: {
                     verb: "put",
                     description: "output pdf file",
@@ -264,7 +254,7 @@ router.post('/designautomation/activities', async( req, res, next) => {
             Activity : qualifiedActivityId,
             Status : "Created"
         }
-        designAutomation.activity_name = qualifiedActivityId;
+        designAutomation.activity_name = activityName;
         res.status(200).end(JSON.stringify(activityRes));
         return;
     }

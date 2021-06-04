@@ -95,7 +95,7 @@ environment variable examples:
 - FORGE_CALLBACK_URL: `http://localhost:3000/api/forge/callback/oauth`
 - FORGE_WEBHOOK_URL: `http://808efcdc123456.ngrok.io/api/forge/callback/designautomation`
 - DESIGN_AUTOMATION_NICKNAME: You can pass your client id here, but if you have set up the [nickname](https://forge.autodesk.com/en/docs/design-automation/v3/tutorials/revit/step3-create-nickname/), please specify your nickname to this environment variable.
-- DESIGN_AUTOMATION_ACTIVITY_NAME: `ExportToPdfsAppActivity+dev`
+- DESIGN_AUTOMATION_ACTIVITY_NAME: `ExportToPdfsAppActivity`
 
 ### Using the app
 
