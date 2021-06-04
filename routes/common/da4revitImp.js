@@ -173,6 +173,7 @@ function exportPdfs(inputRvtUrl, inputJson, outputExlUrl, access_token_3Legged, 
             json: true
         };
 
+        console.log( options );
         request(options, function (error, response, body) {
             if (error) {
                 reject(error);
