@@ -103,6 +103,7 @@ router.get('/da4revit/v1/revit/:version_storage/pdfs', async (req, res, next) =>
         res.status(200).end(JSON.stringify(exportInfo));
     } catch (err) {
         console.log('get exception while exporting parameters to Excel')
+        console.log(err);
         let workitemStatus = {
             'Status': "Failed"
         };
