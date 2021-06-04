@@ -143,6 +143,8 @@ After installing Github desktop for Windows, on the Git Shell, if you see a ***e
 ## Tips & Tricks
 - Before using the sample to call the workitem, you need to setup your Appbundle & Activity of Design Automation, you can simply use the `Configure` button in the Web Application to create the Appbundle & Activity([https://youtu.be/1NCeH7acIko](https://youtu.be/1NCeH7acIko)). 
 
+- If there is no view to be exported, an empty pdf file will be generated.
+
 ## Limitation
 - Currently Revit Cloud Worksharing is not supported by the Design Automation.  The scenario that this sample demonstrates is applicable only with a file-based Revit model. 
 - Client JavaScript requires modern browser.
