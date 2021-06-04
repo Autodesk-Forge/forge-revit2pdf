@@ -20,11 +20,8 @@ const express = require('express');
 const { credentials }= require('../config');
 
 const {
-    ItemsApi,
-    VersionsApi,
     BucketsApi,
     ObjectsApi,
-    PostBucketsSigned
 } = require('forge-apis');
 
 const { OAuth } = require('./common/oauthImp');
@@ -33,9 +30,6 @@ const {
     getWorkitemStatus, 
     cancelWorkitem,
     exportPdfs,
-    getLatestVersionInfo, 
-    getNewCreatedStorageInfo, 
-    createBodyOfPostVersion,
     workitemList 
 } = require('./common/da4revitImp')
 
@@ -179,6 +173,7 @@ router.post('/callback/designautomation', async (req, res, next) => {
     // Best practice is to tell immediately that you got the call
     // so return the HTTP call and proceed with the business logic
     res.status(202).end();
+    console.log('Workitem callback is triggered.')
 
     let workitemStatus = {
         'WorkitemId': req.body.id,
@@ -195,30 +190,9 @@ router.post('/callback/designautomation', async (req, res, next) => {
             return;
         }
         let index = workitemList.indexOf(workitem);
-
-        if (workitem.createVersionData !== null) {
-            workitemStatus.Status = 'Success';
-            global.MyApp.SocketIo.emit(SOCKET_TOPIC_WORKITEM, workitemStatus);
-            console.log("Create new version by the workitem:  " + workitem.workitemId);
-
-            try {
-                const versions = new VersionsApi();
-                version = await versions.postVersion(workitem.projectId, workitem.createVersionData, req.oauth_client, workitem.access_token_3Legged);
-                if (version === null || version.statusCode !== 201) {
-                    console.log('Falied to create a new version of the file');
-                    workitemStatus.Status = 'Failed'
-                } else {
-                    console.log('Successfully created a new version of the file');
-                    workitemStatus.Status = 'Completed';
-                }
-            } catch (err) {
-                console.log(err);
-                workitemStatus.Status = 'Failed';
-            }
-        } else {
-            workitemStatus.Status = 'Completed';
-            workitemStatus.ExtraInfo = workitem.outputUrl;
-        }
+        workitemStatus.Status = 'Completed';
+        workitemStatus.ExtraInfo = workitem.outputUrl;
+        console.log('Export pdf successfully');
         global.MyApp.SocketIo.emit(SOCKET_TOPIC_WORKITEM, workitemStatus);
         // Remove the workitem after it's done
         workitemList.splice(index, 1);
