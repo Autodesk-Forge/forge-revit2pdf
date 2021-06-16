@@ -64,7 +64,7 @@ router.get('/designautomation/engines', async(req, res, next) => {
         }
 
         const engineList = Allengines.filter( (engine ) => {
-            return (engine.indexOf('Revit') >= 0)
+            return (engine.indexOf('Revit') >= 0 && engine.indexOf('2022')>= 0)
         }).sort((a, b) => (a > b ? -1 : 1));
         res.status(200).end(JSON.stringify(engineList));
     } catch (err) {
