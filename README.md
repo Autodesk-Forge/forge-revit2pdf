@@ -1,4 +1,4 @@
-# design.automation-nodejs-revit.export.pdf
+# forge-revit2pdf
 
 [![Node.js](https://img.shields.io/badge/Node.js-8.0-blue.svg)](https://nodejs.org/)
 [![npm](https://img.shields.io/badge/npm-4.0-blue.svg)](https://www.npmjs.com/)
@@ -31,22 +31,23 @@ This sample demonstrates how to export views and sheets from Revit to PDF with t
 
 1. **Forge Account**: Learn how to create a Forge Account, activate subscription and create an app at [this tutorial](http://learnforge.autodesk.io/#/account/). 
 2. **Visual Code**: Visual Code (Windows or MacOS).
-3. **ngrok**: Routing tool, [download here](https://ngrok.com/)
-4. **Revit 2022**: required to compile changes into the plugin
-5. **JavaScript ES6** syntax for server-side.
-6. **JavaScript** basic knowledge with **jQuery**
+3. **Visual Studio 2019** (Windows).
+4. **ngrok**: Routing tool, [download here](https://ngrok.com/)
+5. **Revit 2022**: required to compile changes into the plugin
+6. **JavaScript ES6** syntax for server-side.
+7. **JavaScript** basic knowledge with **jQuery**
 
 
 For using this sample, you need an Autodesk developer credentials. Visit the [Forge Developer Portal](https://developer.autodesk.com), sign up for an account, then [create an app](https://developer.autodesk.com/myapps/create). For this new app, use **http://localhost:3000/api/forge/callback/oauth** as Callback URL, although is not used on 2-legged flow. Finally take note of the **Client ID** and **Client Secret**.
 
 ## Running locally
-1. Open ExportToPdfsApp.sln in Visual Studio, build the Revit Addon, it will build `ExportToPdfsApp.dll` and package `ExportToPdfsApp.bundle` into folder of \</public/bundles\> automatically.
+1. Install [NodeJS](https://nodejs.org), version 8 or newer.
 
-2. Install [NodeJS](https://nodejs.org), version 8 or newer.
+2. Clone this project or download it (this `main` branch only). It's recommended to install [GitHub desktop](https://desktop.github.com/). To clone it via command line, use the following (**Terminal** on MacOSX/Linux, **Git Shell** on Windows):
 
-3. Clone this project or download it (this `nodejs` branch only). It's recommended to install [GitHub desktop](https://desktop.github.com/). To clone it via command line, use the following (**Terminal** on MacOSX/Linux, **Git Shell** on Windows):
+    git clone https://github.com/Autodesk-Forge/forge-revit2pdf
 
-    git clone https://github.com/Autodesk-Forge/design.automation-nodejs-revit.export.pdf
+3. (Optional) Open ExportToPdfsApp.sln in Visual Studio, build the Revit Addon, it will build `ExportToPdfsApp.dll` and package `ExportToPdfsApp.bundle` into folder of \</public/bundles\> automatically, or you can use the build-in package of `ExportToPdfsApp.zip`. 
 
 4. Install the required packages using `npm install`.
 5. Start server by `npm start`.
@@ -67,8 +68,6 @@ Mac OSX/Linux (Terminal)
     export FORGE_CLIENT_SECRET=<<YOUR CLIENT SECRET>>
     export FORGE_CALLBACK_URL=<<YOUR CALLBACK URL>>
     export FORGE_WEBHOOK_URL=<<YOUR DESIGN AUTOMATION FOR REVIT CALLBACK URL>>
-    export DESIGN_AUTOMATION_NICKNAME=<<YOUR DESIGN AUTOMATION FOR REVIT NICK NAME>>
-    export DESIGN_AUTOMATION_ACTIVITY_NAME=<<YOUR DESIGN AUTOMATION FOR REVIT ACTIVITY NAME>>
     npm start
 
 Windows (use **Node.js command line** from Start menu)
@@ -78,8 +77,6 @@ Windows (use **Node.js command line** from Start menu)
     set FORGE_CLIENT_SECRET=<<YOUR CLIENT SECRET>>
     set FORGE_CALLBACK_URL=<<YOUR CALLBACK URL>>
     set FORGE_WEBHOOK_URL=<<YOUR DESIGN AUTOMATION FOR REVIT CALLBACK URL>>
-    set DESIGN_AUTOMATION_NICKNAME=<<YOUR DESIGN AUTOMATION FOR REVIT NICK NAME>>
-    set DESIGN_AUTOMATION_ACTIVITY_NAME=<<YOUR DESIGN AUTOMATION FOR REVIT ACTIVITY NAME>>
     npm start
 
 Windows (use **PowerShell** from Start menu)
@@ -89,31 +86,33 @@ Windows (use **PowerShell** from Start menu)
     $env:FORGE_CLIENT_SECRET="YOUR CLIENT SECRET"
     $env:FORGE_CALLBACK_URL="YOUR CALLBACK URL"
     $env:FORGE_WEBHOOK_URL="YOUR DESIGN AUTOMATION FOR REVIT CALLBACK URL"
-    $env:DESIGN_AUTOMATION_NICKNAME="YOUR DESIGN AUTOMATION FOR REVIT NICK NAME"
-    $env:DESIGN_AUTOMATION_ACTIVITY_NAME="YOUR DESIGN AUTOMATION FOR REVIT ACTIVITY NAME"
     npm start
 
 **Note.**
 environment variable examples:
 - FORGE_CALLBACK_URL: `http://localhost:3000/api/forge/callback/oauth`
 - FORGE_WEBHOOK_URL: `http://808efcdc123456.ngrok.io/api/forge/callback/designautomation`
-- DESIGN_AUTOMATION_NICKNAME: You can pass your client id here, but if you have set up the [nickname](https://forge.autodesk.com/en/docs/design-automation/v3/tutorials/revit/step3-create-nickname/), please specify your nickname to this environment variable.
-- DESIGN_AUTOMATION_ACTIVITY_NAME: `ExportToPdfsAppActivity`
+
+Optional:
+- DESIGN_AUTOMATION_NICKNAME: Your client id will be used by default, but if you have set up the [nickname](https://forge.autodesk.com/en/docs/design-automation/v3/tutorials/revit/step3-create-nickname/), please specify your nickname to this environment variable.
+- DESIGN_AUTOMATION_ACTIVITY_NAME: `ExportToPdfsAppActivity` will be used as default activity name after creating the bundle and activity, please specify the value if restarting the server. 
 
 ### Using the app
 
 Open the browser: [http://localhost:3000](http://localhost:3000), it provides the abilities to export pdf file for views|sheets: 
 
-1. Select Revit file version in BIM360 Hub to view the Model, Select view types which you want to export, click 'Export'.
-2. When the pdf file is successfully exported, click `DOWNLOAD` to download the file and open.
+1. (Optional)Make sure the AppBundle & Activity are created. If not, click `Configure` button to create the AppBundle & Activity, please check the video for the steps at [https://youtu.be/1NCeH7acIko](https://youtu.be/1NCeH7acIko). You can also delete the existing AppBundle & Activity and re-create with different Design Automation Revit engine version.
 
-`Note`: When you deploy the app, you have to open the `Configure` button to create the AppBundle & Activity before running the export feature, please check the video for the steps at [https://youtu.be/1NCeH7acIko](https://youtu.be/1NCeH7acIko). You can also delete the existing AppBundle & Activity and re-create with different Design Automation Revit engine version.
+2. Select Revit file version in BIM360 Hub to view the Model, Select view types which you want to export, click 'Export'.
+
+3. When the pdf file is successfully exported, click `DOWNLOAD` to download the file and open.
+
 
 ## Deployment
 
 To deploy this application to Heroku, the **Callback URL** for Forge must use your `.herokuapp.com` address. After clicking on the button below, at the Heroku Create New App page, set your Client ID, Secret, Callback URL and Revit Design Automation variables for Forge.
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/Autodesk-Forge/design.automation-nodejs-revit.export.pdf)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/Autodesk-Forge/forge-revit2pdf)
 
 Watch [this video](https://www.youtube.com/watch?v=Oqa9O20Gj0c) on how deploy samples to Heroku.
 
@@ -143,13 +142,14 @@ After installing Github desktop for Windows, on the Git Shell, if you see a ***e
 ## Tips & Tricks
 - Before using the sample to call the workitem, you need to setup your Appbundle & Activity of Design Automation, you can simply use the `Configure` button in the Web Application to create the Appbundle & Activity([https://youtu.be/1NCeH7acIko](https://youtu.be/1NCeH7acIko)). 
 
+- In this sample, we are intentionally to set the exported view to 5 as maximum to avoid abuse Forge cloud credits, but you can git rid of this by removing the limitation of `i<5` at https://github.com/Autodesk-Forge/forge-revit2pdf/blob/main/ExportToPdfsPlugin/ExportToPdfs.cs#L113.
+
 - If there is no view to be exported, an empty pdf file will be generated.
 
 ## Limitation
 - Currently Revit Cloud Worksharing is not supported by the Design Automation.  The scenario that this sample demonstrates is applicable only with a file-based Revit model. 
 - Client JavaScript requires modern browser.
 - The sample only supports Revit Design Automation Engine 2022.
-- Only 5 views at maximum could be exported by this sample.
 
 ## License
 
