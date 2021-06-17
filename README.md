@@ -142,7 +142,7 @@ After installing Github desktop for Windows, on the Git Shell, if you see a ***e
 ## Tips & Tricks
 - Before using the sample to call the workitem, you need to setup your Appbundle & Activity of Design Automation, you can simply use the `Configure` button in the Web Application to create the Appbundle & Activity([https://youtu.be/1NCeH7acIko](https://youtu.be/1NCeH7acIko)). 
 
-- In this sample, we are intentionally to set the exported view to 5 as maximum to avoid abuse Forge cloud credits, but you can git rid of this by removing the limitation of `i<5` at https://github.com/Autodesk-Forge/forge-revit2pdf/blob/main/ExportToPdfsPlugin/ExportToPdfs.cs#L113.
+- In this sample, we set the maximum number of views to export to 5 for demonstration purpose. You can modify or remove the value `Max_views` as required at this line https://github.com/Autodesk-Forge/forge-revit2pdf/blob/main/ExportToPdfsPlugin/ExportToPdfs.cs#L113.
 
 - If there is no view to be exported, an empty pdf file will be generated.
 

@@ -61,7 +61,7 @@ namespace ExportToPdfsApp
             e.Succeeded = ExportToPdfs(e.DesignAutomationData);
         }
 
-        public static bool ExportToPdfs(DesignAutomationData data)
+        public bool ExportToPdfs(DesignAutomationData data)
         {
             if (data == null)
                 throw new ArgumentNullException(nameof(data));
@@ -84,7 +84,7 @@ namespace ExportToPdfsApp
         }
 
 
-        private static bool ExportToPdfsImp(Application rvtApp, Document doc, InputParams inputParams)          
+        private bool ExportToPdfsImp(Application rvtApp, Document doc, InputParams inputParams)          
         {
 
             using (Transaction tx = new Transaction(doc))
@@ -108,11 +108,13 @@ namespace ExportToPdfsApp
 
                 Console.WriteLine("the number of views: " + views.Count);
 
-                // add the limitation for 5 views as max
+                // Note: Setting the maximum number of views to be exported as 5 for demonstration purpose.
+                // Remove or edit here in your production application
+                const int Max_views = 5;
                 IList<ElementId> viewIds = new List<ElementId>();
-                for(int i =0; i< views.Count && i < 5; ++i)
+                for(int i = 0; i < views.Count && i < Max_views; ++i)  // To Do: edit or remove max_views as required.
                 {
-                    Console.WriteLine(views[i].Name +@", view type is: " + views[i].ViewType.ToString());
+                    Console.WriteLine(views[i].Name + @", view type is: " + views[i].ViewType.ToString());
                     viewIds.Add(views[i].Id);
                 }
 
