@@ -38,7 +38,7 @@ module.exports = {
         webhook_url: process.env.FORGE_WEBHOOK_URL,
         endpoint: 'https://developer.api.autodesk.com/da/us-east/v3/',
         nickname:     process.env.DESIGN_AUTOMATION_NICKNAME?process.env.DESIGN_AUTOMATION_NICKNAME:process.env.FORGE_CLIENT_ID,
-        activity_name: process.env.DESIGN_AUTOMATION_ACTIVITY_NAME,
+        activity_name: process.env.DESIGN_AUTOMATION_ACTIVITY_NAME?process.env.DESIGN_AUTOMATION_ACTIVITY_NAME:"ExportToPdfsAppActivity",
         appbundle_activity_alias: 'dev',
 
         URL:{

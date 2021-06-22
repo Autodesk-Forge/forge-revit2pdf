@@ -254,7 +254,7 @@ router.post('/designautomation/activities', async( req, res, next) => {
             Activity : qualifiedActivityId,
             Status : "Created"
         }
-        designAutomation.activity_name = activityName;
+        process.env.DESIGN_AUTOMATION_ACTIVITY_NAME = activityName;
         res.status(200).end(JSON.stringify(activityRes));
         return;
     }

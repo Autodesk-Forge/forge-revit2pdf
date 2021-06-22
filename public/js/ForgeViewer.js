@@ -24,12 +24,9 @@ function launchViewer(urn) {
     getAccessToken: getForgeToken
   };
 
-  var config3d = {
-    extensions: ['CustomPropertyPanelExtension'],
-  };
 
   Autodesk.Viewing.Initializer(options, function onInitialized() {
-    viewer = new Autodesk.Viewing.GuiViewer3D(document.getElementById('forgeViewer'), config3d);
+    viewer = new Autodesk.Viewing.GuiViewer3D(document.getElementById('forgeViewer'));
     viewer.start();
     var documentId = 'urn:' + urn;
     Autodesk.Viewing.Document.load(documentId, onDocumentLoadSuccess, onDocumentLoadFailure);
